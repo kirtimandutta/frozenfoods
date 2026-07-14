@@ -99,17 +99,15 @@ function ProductCard({
       className="w-[260px] shrink-0 scroll-snap-align-start sm:w-[280px]"
       style={{ scrollSnapAlign: "start" }}
     >
-      <div
-        className="relative mb-5 aspect-[3/4] overflow-hidden rounded-[24px] shadow-[var(--shadow-product)] transition-transform duration-500 hover:scale-[1.015]"
-        style={{ background: `linear-gradient(160deg, ${product.hue} 0%, #0d0d0d 100%)` }}
-      >
-        <div
-          className="absolute inset-0"
-          style={{
-            background: `radial-gradient(ellipse at 40% 25%, ${product.accent}33, transparent 55%)`,
-          }}
+      <div className="relative mb-5 aspect-[3/4] overflow-hidden rounded-[24px] shadow-[var(--shadow-product)] transition-transform duration-500 hover:scale-[1.015]">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={product.image}
+          alt={product.name}
+          className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-4 rounded-[18px] border border-white/8" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
+        <div className="absolute inset-4 rounded-[18px] border border-white/10" />
 
         <div className="relative flex h-full flex-col justify-between p-6">
           <p
@@ -119,21 +117,7 @@ function ProductCard({
             {product.category}
           </p>
 
-          <div className="flex flex-1 items-center justify-center py-6">
-            <div
-              className="h-24 w-24 rounded-full opacity-80 blur-2xl"
-              style={{ backgroundColor: product.accent }}
-            />
-            <div
-              className="absolute h-16 w-16 rounded-[40%] opacity-90"
-              style={{
-                background: `linear-gradient(135deg, ${product.accent}, transparent)`,
-                boxShadow: `0 0 40px ${product.accent}44`,
-              }}
-            />
-          </div>
-
-          <p className="text-[11px] tracking-[0.16em] text-white/45 uppercase">
+          <p className="text-[11px] tracking-[0.16em] text-white/70 uppercase">
             Flash-frozen
           </p>
         </div>

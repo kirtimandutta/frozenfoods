@@ -1,6 +1,6 @@
 export function Footer() {
   return (
-    <footer className="border-t border-border">
+    <footer className="relative z-10 border-t border-border">
       <div className="mx-auto grid max-w-7xl gap-16 px-6 py-20 md:grid-cols-[1.4fr_1fr_1fr] md:px-10 md:py-28">
         <div>
           <p className="mb-4 text-[clamp(2rem,4vw,2.75rem)] font-semibold tracking-[-0.035em] text-foreground">

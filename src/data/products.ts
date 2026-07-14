@@ -6,6 +6,7 @@ export type Product = {
   category: string;
   hue: string;
   accent: string;
+  image: string;
 };
 
 export const products: Product[] = [
@@ -17,6 +18,7 @@ export const products: Product[] = [
     category: "Pasta",
     hue: "#1a2e28",
     accent: "#2ee6a8",
+    image: "/products/truffle-gnocchi.png",
   },
   {
     id: "coastal-biryani",
@@ -26,6 +28,7 @@ export const products: Product[] = [
     category: "Rice",
     hue: "#1e2433",
     accent: "#7dd3fc",
+    image: "/products/coastal-biryani.png",
   },
   {
     id: "miso-salmon",
@@ -35,6 +38,7 @@ export const products: Product[] = [
     category: "Seafood",
     hue: "#2a1f1a",
     accent: "#fbbf24",
+    image: "/products/miso-salmon.png",
   },
   {
     id: "wild-mushroom",
@@ -44,6 +48,7 @@ export const products: Product[] = [
     category: "Risotto",
     hue: "#1f2418",
     accent: "#a3e635",
+    image: "/products/wild-mushroom.png",
   },
   {
     id: "butter-chicken",
@@ -53,6 +58,7 @@ export const products: Product[] = [
     category: "Curry",
     hue: "#2a1814",
     accent: "#fb923c",
+    image: "/products/butter-chicken.png",
   },
   {
     id: "matcha-mochi",
@@ -62,6 +68,7 @@ export const products: Product[] = [
     category: "Dessert",
     hue: "#14241c",
     accent: "#86efac",
+    image: "/products/matcha-mochi.png",
   },
 ];
 
@@ -73,6 +80,7 @@ export const bentoFeatures = [
     description:
       "Locked at peak freshness in minutes—not hours. Nutrients, texture, and aroma preserved exactly as the chef intended.",
     span: "lg:col-span-2 lg:row-span-2",
+    image: "/bento/flash-frozen.png",
   },
   {
     id: "zero-preservatives",
@@ -80,6 +88,7 @@ export const bentoFeatures = [
     title: "Zero Preservatives",
     description: "Cold is the only preservative we trust. Nothing synthetic. Nothing hidden.",
     span: "lg:col-span-1 lg:row-span-1",
+    image: "/bento/zero-preservatives.png",
   },
   {
     id: "chef-crafted",
@@ -87,6 +96,7 @@ export const bentoFeatures = [
     title: "Chef-Crafted Recipes",
     description: "Developed with restaurant kitchens. Perfected for your freezer.",
     span: "lg:col-span-1 lg:row-span-1",
+    image: "/bento/chef-crafted.png",
   },
   {
     id: "ready-minutes",
@@ -94,6 +104,7 @@ export const bentoFeatures = [
     title: "Ready in Minutes",
     description: "From frozen to plated in under 12 minutes—gourmet without the wait.",
     span: "lg:col-span-1 lg:row-span-1",
+    image: "/bento/ready-minutes.png",
   },
   {
     id: "traceable",
@@ -101,5 +112,6 @@ export const bentoFeatures = [
     title: "Traceable Ingredients",
     description: "Every protein and produce lot audited from farm and sea to freeze tunnel.",
     span: "lg:col-span-2 lg:row-span-1",
+    image: "/bento/traceable.png",
   },
 ];

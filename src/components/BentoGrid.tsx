@@ -19,31 +19,41 @@ export function BentoGrid() {
       </Reveal>
 
       <Stagger className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-5">
-        {bentoFeatures.map((feature) => (
-          <motion.article
-            key={feature.id}
-            variants={staggerItem}
-            className={`group relative overflow-hidden rounded-[var(--radius-bento)] bg-surface-elevated p-8 md:p-10 ${feature.span}`}
-          >
-            <div className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-              <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-accent/10 blur-3xl" />
-            </div>
+        {bentoFeatures.map((feature) => {
+          const isHero = feature.id === "flash-frozen";
 
-            <div className="relative flex h-full min-h-[180px] flex-col justify-between gap-8">
-              <p className="text-[11px] font-semibold tracking-[0.24em] text-muted uppercase">
-                {feature.label}
-              </p>
-              <div>
-                <h3 className="mb-3 text-[1.5rem] leading-tight font-semibold tracking-[-0.025em] text-foreground md:text-[1.75rem]">
-                  {feature.title}
-                </h3>
-                <p className="max-w-md text-[15px] leading-relaxed text-muted md:text-base">
-                  {feature.description}
+          return (
+            <motion.article
+              key={feature.id}
+              variants={staggerItem}
+              className={`group relative overflow-hidden rounded-[var(--radius-bento)] ${feature.span} ${
+                isHero ? "min-h-[340px] md:min-h-[420px]" : "min-h-[240px]"
+              }`}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={feature.image}
+                alt=""
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/35 to-black/15" />
+
+              <div className="relative flex h-full min-h-[inherit] flex-col justify-between gap-8 p-8 md:p-10">
+                <p className="text-[11px] font-semibold tracking-[0.24em] text-white/70 uppercase">
+                  {feature.label}
                 </p>
+                <div>
+                  <h3 className="mb-3 text-[1.5rem] leading-tight font-semibold tracking-[-0.025em] text-white md:text-[1.75rem]">
+                    {feature.title}
+                  </h3>
+                  <p className="max-w-md text-[15px] leading-relaxed text-white/75 md:text-base">
+                    {feature.description}
+                  </p>
+                </div>
               </div>
-            </div>
-          </motion.article>
-        ))}
+            </motion.article>
+          );
+        })}
       </Stagger>
     </section>
   );
