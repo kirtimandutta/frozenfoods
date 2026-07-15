@@ -1,7 +1,7 @@
 "use client";
 
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Billboard, Image } from "@react-three/drei";
+import { Canvas, useFrame, useLoader } from "@react-three/fiber";
+import { Billboard } from "@react-three/drei";
 import gsap from "gsap";
 import {
   Suspense,
@@ -10,14 +10,22 @@ import {
   useRef,
   type RefObject,
 } from "react";
-import { Vector3, type Group, type Object3D } from "three";
+import {
+  LinearFilter,
+  LinearMipmapLinearFilter,
+  SRGBColorSpace,
+  TextureLoader,
+  Vector3,
+  type Group,
+  type Object3D,
+  type Texture,
+} from "three";
 
 const HERO_PRODUCTS = [
-  { src: "/hero/sausages.png", alt: "Frozen sausages" },
-  { src: "/hero/whole-chicken.png", alt: "Whole frozen chicken" },
-  { src: "/hero/paneer.png", alt: "Paneer cubes" },
-  { src: "/hero/chicken-legs.png", alt: "Chicken drumsticks" },
-  { src: "/hero/frozen-peas.png", alt: "Frozen peas" },
+  { src: "/hero/mixed-vegetables.png", alt: "Premium mixed vegetables" },
+  { src: "/hero/salmon-fillet.png", alt: "Wild-caught Atlantic salmon fillet" },
+  { src: "/hero/pepperoni-pizza.png", alt: "Classic pepperoni pizza" },
+  { src: "/hero/chicken-tikka-masala.png", alt: "Authentic chicken tikka masala" },
 ] as const;
 
 /** Wider circular radius — same pattern as before, just stretched */
@@ -29,6 +37,51 @@ type HeroOrbitProps = {
 };
 
 const _world = new Vector3();
+
+function prepareTexture(texture: Texture) {
+  texture.colorSpace = SRGBColorSpace;
+  texture.minFilter = LinearMipmapLinearFilter;
+  texture.magFilter = LinearFilter;
+  texture.anisotropy = 8;
+  texture.generateMipmaps = true;
+  texture.needsUpdate = true;
+  return texture;
+}
+
+function ProductBillboard({
+  url,
+  position,
+}: {
+  url: string;
+  position: [number, number, number];
+}) {
+  const texture = useLoader(TextureLoader, url);
+  prepareTexture(texture);
+
+  const aspect =
+    texture.image && texture.image.width && texture.image.height
+      ? texture.image.width / texture.image.height
+      : 1;
+
+  const scale: [number, number, number] =
+    aspect >= 1
+      ? [ITEM_SIZE, ITEM_SIZE / aspect, 1]
+      : [ITEM_SIZE * aspect, ITEM_SIZE, 1];
+
+  return (
+    <Billboard position={position} follow>
+      <mesh scale={scale}>
+        <planeGeometry args={[1, 1]} />
+        <meshBasicMaterial
+          map={texture}
+          transparent
+          toneMapped={false}
+          depthWrite={false}
+        />
+      </mesh>
+    </Billboard>
+  );
+}
 
 function OrbitRing() {
   const ringRef = useRef<Group>(null);
@@ -67,9 +120,11 @@ function OrbitRing() {
     };
   }, []);
 
-  useFrame(({ camera }) => {
+  useFrame(({ camera, gl }) => {
     const ring = ringRef.current;
     if (!ring) return;
+
+    const maxAnisotropy = gl.capabilities.getMaxAnisotropy();
 
     ring.children.forEach((child: Object3D) => {
       child.getWorldPosition(_world);
@@ -81,29 +136,32 @@ function OrbitRing() {
 
       child.traverse((obj) => {
         const mesh = obj as {
-          material?: { opacity?: number; transparent?: boolean };
+          material?: {
+            opacity?: number;
+            transparent?: boolean;
+            map?: Texture;
+          };
         };
         if (mesh.material && "opacity" in mesh.material) {
           mesh.material.transparent = true;
           mesh.material.opacity = opacity;
+          if (mesh.material.map && mesh.material.map.anisotropy < maxAnisotropy) {
+            mesh.material.map.anisotropy = Math.min(8, maxAnisotropy);
+            mesh.material.map.needsUpdate = true;
+          }
         }
       });
     });
   });
 
-  // No <Center> — it was shifting the pivot because product bounds differ.
-  // Positions are already symmetric around the origin.
   return (
     <group ref={ringRef}>
       {slots.map((slot) => (
-        <Billboard key={slot.src} position={slot.position} follow>
-          <Image
-            url={slot.src}
-            scale={[ITEM_SIZE, ITEM_SIZE]}
-            transparent
-            toneMapped={false}
-          />
-        </Billboard>
+        <ProductBillboard
+          key={slot.src}
+          url={slot.src}
+          position={slot.position}
+        />
       ))}
     </group>
   );
@@ -116,7 +174,7 @@ export function HeroOrbit(_props: HeroOrbitProps) {
       aria-hidden
     >
       <Canvas
-        dpr={[1, 1.5]}
+        dpr={[1, 2]}
         camera={{ position: [0, 0, 5.6], fov: 42, near: 0.1, far: 40 }}
         gl={{ alpha: true, antialias: true, premultipliedAlpha: false }}
         style={{ width: "100%", height: "100%", background: "transparent" }}

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Button } from "./Button";
+import { HeroBackdrop } from "./HeroBackdrop";
 import { HeroOrbit } from "./HeroOrbit";
 
 export function Hero() {
@@ -10,12 +11,13 @@ export function Hero() {
       id="top"
       className="atmosphere relative flex min-h-[100svh] flex-col overflow-hidden"
     >
+      <HeroBackdrop />
       <div
-        className="pointer-events-none absolute inset-0 opacity-40 dark:opacity-30"
+        className="pointer-events-none absolute inset-0 z-[6] opacity-50 dark:opacity-40"
         aria-hidden
       >
-        <div className="absolute left-1/2 top-[18%] h-[55vmax] w-[55vmax] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(46,230,168,0.12)_0%,transparent_68%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_60%,var(--background)_100%)]" />
+        <div className="absolute left-1/2 top-[18%] h-[55vmax] w-[55vmax] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(46,230,168,0.1)_0%,transparent_68%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_55%,var(--background)_100%)]" />
       </div>
 
       {/* TOP */}
@@ -33,9 +35,15 @@ export function Hero() {
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-          className="text-[clamp(3.25rem,10vw,5.4rem)] leading-[0.92] font-semibold tracking-[-0.045em] text-foreground"
+          className="mx-auto w-full max-w-[min(92vw,34rem)]"
         >
-          Angad
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/hero/frozen-food-logo.png"
+            alt="Frozen Food"
+            className="mx-auto h-auto w-full select-none"
+            draggable={false}
+          />
         </motion.h1>
       </div>
 
