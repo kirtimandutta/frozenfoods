@@ -1,5 +1,6 @@
 "use client";
 
+import { assetPath } from "@/lib/assetPath";
 import { Reveal } from "./Reveal";
 
 const chapters = [
@@ -35,7 +36,7 @@ export function ScrollChapters() {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={chapter.image}
+                src={assetPath(chapter.image)}
                 alt=""
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
               />

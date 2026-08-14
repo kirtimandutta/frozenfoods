@@ -1,6 +1,7 @@
 "use client";
 
 import type { CSSProperties } from "react";
+import { assetPath } from "@/lib/assetPath";
 
 type FloatingCube = {
   left: string;
@@ -36,7 +37,7 @@ export function HeroBackdrop() {
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/hero/ice-backdrop.png"
+        src={assetPath("/hero/ice-backdrop.png")}
         alt=""
         className="hero-backdrop__image"
         draggable={false}

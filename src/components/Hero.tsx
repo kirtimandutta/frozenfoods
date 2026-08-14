@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { assetPath } from "@/lib/assetPath";
 import { Button } from "./Button";
 import { HeroBackdrop } from "./HeroBackdrop";
 import { HeroOrbit } from "./HeroOrbit";
@@ -39,7 +40,7 @@ export function Hero() {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/hero/frozen-food-logo.png"
+            src={assetPath("/hero/frozen-food-logo.png")}
             alt="Frozen Food"
             className="mx-auto h-auto w-full select-none"
             draggable={false}

@@ -20,12 +20,13 @@ import {
   type Object3D,
   type Texture,
 } from "three";
+import { assetPath } from "@/lib/assetPath";
 
 const HERO_PRODUCTS = [
-  { src: "/hero/mixed-vegetables.png", alt: "Premium mixed vegetables" },
-  { src: "/hero/salmon-fillet.png", alt: "Wild-caught Atlantic salmon fillet" },
-  { src: "/hero/pepperoni-pizza.png", alt: "Classic pepperoni pizza" },
-  { src: "/hero/chicken-tikka-masala.png", alt: "Authentic chicken tikka masala" },
+  { src: assetPath("/hero/mixed-vegetables.png"), alt: "Premium mixed vegetables" },
+  { src: assetPath("/hero/salmon-fillet.png"), alt: "Wild-caught Atlantic salmon fillet" },
+  { src: assetPath("/hero/pepperoni-pizza.png"), alt: "Classic pepperoni pizza" },
+  { src: assetPath("/hero/chicken-tikka-masala.png"), alt: "Authentic chicken tikka masala" },
 ] as const;
 
 /** Wider circular radius — same pattern as before, just stretched */

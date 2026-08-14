@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Plus } from "lucide-react";
 import { motion } from "framer-motion";
 import { products, type Product } from "@/data/products";
+import { assetPath } from "@/lib/assetPath";
 import { Reveal } from "./Reveal";
 
 export function ProductCarousel() {
@@ -102,7 +103,7 @@ function ProductCard({
       <div className="relative mb-5 aspect-[3/4] overflow-hidden rounded-[24px] shadow-[var(--shadow-product)] transition-transform duration-500 hover:scale-[1.015]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={product.image}
+          src={assetPath(product.image)}
           alt={product.name}
           className="absolute inset-0 h-full w-full object-cover"
         />

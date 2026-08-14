@@ -1,5 +1,6 @@
 "use client";
 
+import { assetPath } from "@/lib/assetPath";
 import { Reveal } from "./Reveal";
 import { Button } from "./Button";
 
@@ -12,7 +13,7 @@ export function Story() {
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/bento/story.png"
+          src={assetPath("/bento/story.png")}
           alt=""
           className="absolute inset-0 h-full w-full object-cover"
         />

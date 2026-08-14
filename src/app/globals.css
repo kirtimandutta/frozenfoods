@@ -304,3 +304,40 @@ body {
 .hero-orbit-item {
   translate: -50% -50%;
 }
+
+.watermark-fab {
+  text-decoration: none;
+}
+
+.watermark-pulse,
+.watermark-pulse-delay {
+  position: absolute;
+  inset: -6px;
+  border-radius: 9999px;
+  border: 2px solid rgba(37, 211, 102, 0.55);
+  pointer-events: none;
+  animation: watermarkPulse 2.2s ease-out infinite;
+}
+
+.watermark-pulse-delay {
+  animation-delay: 1.1s;
+}
+
+@keyframes watermarkPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(1.55);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .watermark-pulse,
+  .watermark-pulse-delay {
+    animation: none;
+    opacity: 0;
+  }
+}

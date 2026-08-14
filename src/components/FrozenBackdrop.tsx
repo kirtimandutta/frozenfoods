@@ -1,5 +1,7 @@
 "use client";
 
+import { assetPath } from "@/lib/assetPath";
+
 /** Fixed photoreal frost texture behind all page content. */
 export function FrozenBackdrop() {
   return (
@@ -9,7 +11,7 @@ export function FrozenBackdrop() {
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/frost-backdrop.png"
+        src={assetPath("/frost-backdrop.png")}
         alt=""
         className="frozen-backdrop__image"
         draggable={false}

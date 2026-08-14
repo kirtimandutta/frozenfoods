@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { bentoFeatures } from "@/data/products";
+import { assetPath } from "@/lib/assetPath";
 import { Reveal, Stagger, staggerItem } from "./Reveal";
 
 export function BentoGrid() {
@@ -32,7 +33,7 @@ export function BentoGrid() {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={feature.image}
+                src={assetPath(feature.image)}
                 alt=""
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
               />
